@@ -1,5 +1,5 @@
-<img src="markdownmonstericon.png"
-     alt="Markdown Monster icon"
+<img src="mocr_logo.jpg"
+     alt="MoCR Logo"
      style="float: left; margin-right: 10px;" />
 # mocr
 Museum of Contemporary Reality
