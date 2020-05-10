@@ -17,32 +17,30 @@ public class camera_controller : MonoBehaviour
 
     private Quaternion crot;
 
-    public float cam_move_speed = .1f;
+    public float cam_move_speed = .03f;
 
     public float cam_rotation_speed = 1f;
    
    
-    // Start is called before the first frame update
+   
     void Start()
     {
-
-        cam_offset = mycam.transform.position; // get the current offset of the cam and save it!
-        cpos = mycam.transform.position; 
+        // get the current offset of the cam and save it!
+        cam_offset = mycam.transform.position; 
+        cpos = mycam.transform.position;  
     }
 
-    // Update is called once per frame
     void Update()
     {
         
 
-        tpos = target.transform.position; // position of cam
+        tpos = target.transform.position; // set target postion of cam
 
-        tpos +=  target.transform.forward*cam_offset.z;
-        tpos += new Vector3(0,cam_offset.y,0);
+        tpos +=  target.transform.forward*cam_offset.z; // add z offset
+        tpos += new Vector3(0,cam_offset.y,0); // add y offset
 
-        cpos = Vector3.Slerp(cpos,tpos,cam_move_speed);
-        mycam.transform.position = cpos; 
-
+        cpos = Vector3.Slerp(cpos,tpos,cam_move_speed);  // smoothing functions
+        mycam.transform.position = cpos;  // apply smooth position
 
 
         Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - mycam.transform.position+focus_offset);

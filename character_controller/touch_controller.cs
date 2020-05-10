@@ -6,15 +6,24 @@ public class touch_controller : MonoBehaviour
 {
    
 
-    public GameObject ring;
-    public GameObject dot;
+    public GameObject ring; // your 2d graphic element for joytick outside ring
+    public GameObject dot; // your 2d graphic element for joytick stick 
 
     Vector2 anchor;
-    Vector2 cpos;
+    Vector2 cpos; 
 
     bool touching = false;
 
-    public static Vector2 movement;
+    public static Vector2 movement; // touch movement vector shared!
+
+
+    void Start(){
+
+            ring.SetActive(false);
+            dot.SetActive(false);
+
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -38,7 +47,7 @@ public class touch_controller : MonoBehaviour
             // mousemove - touchmove ---------------------------------------------
             if(Input.GetMouseButton(0)){
 
-
+                    // update the offset between anchor point and current finger position
                     cpos = new Vector2(  Input.mousePosition.x,  Input.mousePosition.y);
                     dot.transform.position = cpos;
 
@@ -50,7 +59,7 @@ public class touch_controller : MonoBehaviour
 
                     ring.SetActive(false);
                     dot.SetActive(false);
-                     touching = false;
+                    touching = false;
 
 
 
@@ -66,18 +75,15 @@ public class touch_controller : MonoBehaviour
 
         if(touching){
 
-            // if user touches
+            // if user touches > calc movement vector
             Vector2 off = cpos - anchor;
-            Vector2 dir = Vector2.ClampMagnitude(off*.01f,1f);
-            // x -1 / 1
-            // y -1 / 1
-
+            Vector2 dir = Vector2.ClampMagnitude(off*.005f,1f);
             movement = dir;
 
 
         }else{
 
-            // if user does not touch
+            // if user does not touch > set all to zero
              movement = Vector2.zero;
         }
 
